@@ -1,6 +1,8 @@
 package io.swagger.samples.inflector.springboot.models;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Link;
 
@@ -17,6 +19,24 @@ public class UserResource implements Resource {
   @Override
   public List<Link> getLinks() {
     throw new NotImplementedException("TODO");
+  }
+  
+  public UserDetails getUser() {
+	  String sql = "select * from UserDetails";
+	  
+	  UserDetails userDetails = new UserDetails();
+	  
+	  Map<String, Object> rows = jdbcTemplate.queryForMap(sql);
+	  
+	  userDetails.setDob((String) rows.get("DoB"));
+	  
+	  String name = (String) rows.get("Name");
+	  
+	  String[] names = name.split(" ");
+	  userDetails.setFirstname(names[1]);
+	  userDetails.setSurname(names[0]);
+	  
+	  return userDetails;
   }
 
 }

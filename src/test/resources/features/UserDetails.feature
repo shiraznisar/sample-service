@@ -11,8 +11,9 @@ Feature: User Details
       | DoB  | 01/Jan/1768 |
     When I request the User Details API
     Then I'll get the following user details
-      | Surname | GivenName | DoB        |
-      | Doe     | John      | 1768-01-01 |
+      | Surname | Doe |         
+      | GivenName     | John      |  
+      | DoB | 1768-01-01 |
 
   Scenario: Set Preferred Name
     Given The User table has the following entry

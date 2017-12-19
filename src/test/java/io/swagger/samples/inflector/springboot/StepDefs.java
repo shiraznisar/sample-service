@@ -24,6 +24,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.swagger.samples.inflector.springboot.client.SampleServiceClient;
 import io.swagger.samples.inflector.springboot.models.Resource;
+import io.swagger.samples.inflector.springboot.models.UserDetails;
+import io.swagger.samples.inflector.springboot.models.UserResource;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { InflectorApplication.class, TestConfiguration.class })
@@ -86,12 +88,9 @@ public class StepDefs {
 	}
 
 	@Then("^I'll get the following user details$")
-	public void iLlGetTheFollowingUserDetails(DataTable arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-		// E,K,V must be a scalar (String, Integer, Date, enum etc)
-		throw new PendingException();
+	public void iLlGetTheFollowingUserDetails(Map<String, String> userDetails) throws Throwable {
+		UserResource ur = (UserResource) resource;
+		assertThat(ur.getUser().getDob(), equalTo(userDetails.get("DoB")));
 	}
 
 	@When("^set the preferred name to \"([^\"]*)\"$")
